@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/studenthub/static/css/main.77811d86.css",
+    "main.js": "/studenthub/static/js/main.14217034.js",
+    "static/js/453.149e4bf4.chunk.js": "/studenthub/static/js/453.149e4bf4.chunk.js",
+    "index.html": "/studenthub/index.html",
+    "main.77811d86.css.map": "/studenthub/static/css/main.77811d86.css.map",
+    "main.14217034.js.map": "/studenthub/static/js/main.14217034.js.map",
+    "453.149e4bf4.chunk.js.map": "/studenthub/static/js/453.149e4bf4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.77811d86.css",
+    "static/js/main.14217034.js"
+  ]
+}
