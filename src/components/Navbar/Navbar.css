@@ -1,0 +1,72 @@
+.mainNavbar {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.navbarContainer {
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbarBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.navbarLinks {
+  display: flex;
+  gap: 24px;
+}
+
+.navbarLinks a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #475569;
+}
+
+.navbarLinks a:hover {
+  color: #1e293b;
+}
+
+.navbarActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.loginLink {
+  text-decoration: none;
+  color: #475569;
+  font-size: 15px;
+}
+
+.signupButton {
+  padding: 8px 16px;
+  background-color: #4f46e5;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signupButton:hover {
+  background-color: #4338ca;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: #1e293b;
+}

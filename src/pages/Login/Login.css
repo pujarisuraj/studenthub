@@ -1,0 +1,184 @@
+/* Page */
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #eef3ff, #ffffff 70%);
+}
+
+/* Container */
+.loginContainer {
+  width: 100%;
+  max-width: 440px;
+  padding: 20px;
+}
+
+/* Brand */
+.brandRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.brandIcon {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.brandName {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* Card */
+.loginCard {
+  background-color: #ffffff;
+  padding: 34px;
+  border-radius: 14px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.cardDescription {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+  margin: 10px 0 24px;
+}
+
+/* Error */
+.errorMessage {
+  background-color: #fdecec;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+/* Form */
+.formField {
+  margin-bottom: 18px;
+}
+
+.formField label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.inputWithIcon {
+  display: flex;
+  align-items: center;
+  background-color: #eef4ff;
+  border: 1px solid #dbe3ff;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+
+.inputWithIcon svg {
+  color: #64748b;
+}
+
+.inputWithIcon input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.inputWithIcon input:focus {
+  outline: none;
+}
+
+/* Password toggle */
+.passwordToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4f6ef7;
+}
+
+/* Actions */
+.formActions {
+  text-align: right;
+  margin-bottom: 18px;
+}
+
+.formActions a {
+  font-size: 13px;
+  color: #4f6ef7;
+}
+
+/* Button */
+.loginButton {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, #2563eb, #4f46e5);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.loginButton:disabled {
+  opacity: 0.7;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 26px 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #e5e7eb;
+}
+
+.divider span {
+  margin: 0 12px;
+}
+
+/* Register */
+.registerLink {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #111827;
+}
+
+/* Back link */
+.backHomeLink {
+  display: block;
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+}

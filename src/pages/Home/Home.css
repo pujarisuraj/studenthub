@@ -1,0 +1,127 @@
+/* ---------------- BASE ---------------- */
+.homePage {
+  background-color: #f7f8fa;
+  color: #1c1c1c;
+}
+
+/* ---------------- INTRO SECTION ---------------- */
+.introSection {
+  background-color: #ffffff;
+  padding: 120px 60px 110px;
+  position: relative;
+}
+
+.introLayout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 90px;
+  align-items: center;
+}
+
+/* subtle academic depth */
+.introSection::after {
+  content: "";
+  position: absolute;
+  right: -140px;
+  top: 45%;
+  width: 420px;
+  height: 420px;
+  background: rgba(74, 111, 165, 0.07);
+  border-radius: 50%;
+}
+
+/* ---------------- TEXT ---------------- */
+.introLabel {
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #4a6fa5;
+}
+
+.introHeading {
+  font-size: 48px;
+  line-height: 1.15;
+  margin: 18px 0 22px;
+}
+
+.introHeading span {
+  color: #4a6fa5;
+}
+
+.introDescription {
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 540px;
+  color: #444;
+}
+
+/* ---------------- BUTTON ---------------- */
+.primaryButton {
+  margin-top: 34px;
+  padding: 14px 36px;
+  background-color: #4a6fa5;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(74, 111, 165, 0.35);
+}
+
+/* ---------------- STATS ---------------- */
+.introStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.statItem {
+  background-color: #ffffff;
+  padding: 28px;
+  border-radius: 6px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #4a6fa5;
+}
+
+.statItem h3 {
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+
+.statItem p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* ---------------- PURPOSE SECTION ---------------- */
+.purposeSection {
+  padding: 100px 60px 120px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  margin-bottom: 70px;
+  text-align: center;
+}
+
+.purposeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px;
+}
+
+.purposeBlock h3 {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.purposeBlock p {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #555;
+}

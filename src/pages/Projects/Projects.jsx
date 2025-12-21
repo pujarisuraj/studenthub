@@ -1,0 +1,174 @@
+import { useState } from "react";
+import "./Projects.css";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
+
+/* ---------------- PROJECT DATA ---------------- */
+const projectList = [
+  {
+    id: 1,
+    status: "pending",
+    title: "Online Quiz Portal",
+    description:
+      "Interactive quiz portal with multiple question types, timer functionality, and instant results.",
+    image: "https://via.placeholder.com/400x250",
+    teamLeader: "Sneha Reddy",
+    course: "MCA 1st Semester",
+    techStack: ["Angular", "Node.js", "MySQL"],
+    views: 450,
+    likes: 18,
+  },
+  {
+    id: 2,
+    status: "approved",
+    title: "College Management System",
+    description:
+      "Complete college management system with student registration, course management, and attendance.",
+    image: "https://via.placeholder.com/400x250",
+    teamLeader: "Priya Patel",
+    course: "BCA 5th Semester",
+    techStack: ["Python", "Django", "PostgreSQL"],
+    views: 890,
+    likes: 32,
+  },
+  {
+    id: 3,
+    status: "approved",
+    title: "Library Management System",
+    description:
+      "Complete library management solution with book inventory and circulation.",
+    image: "https://via.placeholder.com/400x250",
+    teamLeader: "Vikram Singh",
+    course: "B.Sc 3rd Semester",
+    techStack: ["Java", "Spring Boot", "PostgreSQL"],
+    views: 670,
+    likes: 25,
+  },
+  {
+    id: 4,
+    status: "approved",
+    title: "E-Learning Platform",
+    description:
+      "E-learning platform with video lectures, quizzes, and progress tracking.",
+    image: "https://via.placeholder.com/400x250",
+    teamLeader: "Rahul Sharma",
+    course: "MCA 3rd Semester",
+    techStack: ["React", "Node.js", "MongoDB"],
+    views: 1250,
+    likes: 45,
+  },
+  {
+    id: 5,
+    status: "approved",
+    title: "Hostel Management System",
+    description:
+      "Hostel system with room allocation, mess management, and fee tracking.",
+    image: "https://via.placeholder.com/400x250",
+    teamLeader: "Neha Gupta",
+    course: "MCA 5th Semester",
+    techStack: ["React", "Express.js", "MongoDB"],
+    views: 980,
+    likes: 41,
+  },
+  {
+    id: 6,
+    status: "approved",
+    title: "Smart Attendance System",
+    description:
+      "AI-powered attendance system using facial recognition.",
+    image: "https://via.placeholder.com/400x250",
+    teamLeader: "Amit Kumar",
+    course: "B.Tech 4th Semester",
+    techStack: ["React", "Firebase", "Machine Learning"],
+    views: 2100,
+    likes: 78,
+  },
+];
+
+export default function Projects() {
+  const [searchText, setSearchText] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("All");
+  const [selectedTech, setSelectedTech] = useState("All");
+  const [sortType, setSortType] = useState("Latest");
+
+  const filteredProjects = projectList
+    .filter((project) => {
+      const value = searchText.toLowerCase();
+
+      return (
+        project.title.toLowerCase().includes(value) ||
+        project.description.toLowerCase().includes(value) ||
+        project.techStack.some((tech) =>
+          tech.toLowerCase().includes(value)
+        )
+      );
+    })
+    .filter(
+      (project) =>
+        selectedCourse === "All" ||
+        project.course.includes(selectedCourse)
+    )
+    .filter(
+      (project) =>
+        selectedTech === "All" ||
+        project.techStack.includes(selectedTech)
+    )
+    .sort((a, b) => {
+      if (sortType === "Most Popular") return b.views - a.views;
+      if (sortType === "Most Liked") return b.likes - a.likes;
+      return b.id - a.id;
+    });
+
+  return (
+    <div className="projects-page">
+      <div className="projects-header">
+        <div>
+          <h1>Browse Projects</h1>
+          <p>Explore academic projects shared by your fellow students</p>
+        </div>
+        <button className="upload-btn">Upload Your Project</button>
+      </div>
+
+      <div className="filter-bar">
+        <input
+          type="text"
+          placeholder="Search projects by name, description, or tech stack..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+
+        <select onChange={(e) => setSelectedCourse(e.target.value)}>
+          <option value="All">All Courses</option>
+          <option value="MCA">MCA</option>
+          <option value="BCA">BCA</option>
+          <option value="B.Tech">B.Tech</option>
+          <option value="B.Sc">B.Sc</option>
+        </select>
+
+        <select onChange={(e) => setSelectedTech(e.target.value)}>
+          <option value="All">All Technologies</option>
+          <option value="React">React</option>
+          <option value="Node.js">Node.js</option>
+          <option value="Python">Python</option>
+          <option value="Java">Java</option>
+          <option value="Angular">Angular</option>
+        </select>
+
+        <select onChange={(e) => setSortType(e.target.value)}>
+          <option value="Latest">Latest</option>
+          <option value="Most Popular">Most Popular</option>
+          <option value="Most Liked">Most Liked</option>
+        </select>
+      </div>
+
+      <p className="result-count">
+        Showing {filteredProjects.length} of {projectList.length} projects
+      </p>
+
+      <div className="projects-grid">
+        {filteredProjects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </div>
+    </div>
+  );
+}
