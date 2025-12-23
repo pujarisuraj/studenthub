@@ -1,0 +1,11 @@
+.details-container {
+  padding: 50px;
+}
+
+.continue-button {
+  margin-top: 20px;
+  padding: 10px 18px;
+  background-color: #1f3c88;
+  color: white;
+  border: none;
+}

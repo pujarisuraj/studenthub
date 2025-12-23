@@ -1,0 +1,202 @@
+/* ========================= */
+/* PROJECTS PAGE */
+/* ========================= */
+
+.projects-page {
+  max-width: 1400px;
+  margin: auto;
+  padding: 96px 32px 60px;
+  background: linear-gradient(180deg, #fafbfc 0%, #f8fafc 100%);
+  min-height: 100vh;
+}
+
+/* ========================= */
+/* HEADER SECTION */
+/* ========================= */
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid rgba(203, 213, 225, 0.25);
+}
+
+.projects-header h1 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1e293b;
+  letter-spacing: -0.02em;
+  margin: 0;
+  background: linear-gradient(135deg, #1e293b 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.projects-header p {
+  color: #64748b;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.upload-btn {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
+}
+
+/* ========================= */
+/* FILTER BAR */
+/* ========================= */
+
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  margin: 32px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+/* Search Input */
+.filter-bar input {
+  flex: 3.5;
+  padding: 13px 18px;
+  border: 1px solid rgba(203, 213, 225, 0.4);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e293b;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.filter-bar input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.filter-bar input::placeholder {
+  color: #94a3b8;
+}
+
+/* Select Dropdowns */
+.filter-bar select {
+  flex: 1.2;
+  padding: 13px 16px;
+  border: 1px solid rgba(203, 213, 225, 0.4);
+  border-radius: 10px;
+  background: white;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-bar select:hover {
+  border-color: #4f46e5;
+}
+
+.filter-bar select:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.filter-bar select:last-child {
+  flex: 1;
+}
+
+/* ========================= */
+/* RESULT COUNT */
+/* ========================= */
+
+.result-count {
+  margin-bottom: 24px;
+  padding: 10px 16px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  background: rgba(241, 245, 249, 0.6);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* ========================= */
+/* PROJECTS GRID */
+/* ========================= */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+/* ========================= */
+/* RESPONSIVE DESIGN */
+/* ========================= */
+
+@media (max-width: 1200px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-page {
+    padding: 80px 20px 40px;
+  }
+
+  .projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .projects-header h1 {
+    font-size: 28px;
+  }
+
+  .upload-btn {
+    width: 100%;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .filter-bar input,
+  .filter-bar select {
+    flex: 1;
+    width: 100%;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
