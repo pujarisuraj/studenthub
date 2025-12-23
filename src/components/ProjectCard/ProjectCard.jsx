@@ -47,7 +47,7 @@ export default function ProjectCard({ project }) {
       <hr />
 
       {/* Footer */}
-      <div className="footer">
+      <div className="card-footer">
         <div className="author">
           <div className="avatar">
             {project.teamLeader

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Projects.css";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 
@@ -92,26 +93,26 @@ export default function Projects() {
 
   const filteredProjects = projectList
     .filter((project) => {
-      const value = searchText.toLowerCase();
+      const searchValue = searchText.toLowerCase();
 
-      return (
-        project.title.toLowerCase().includes(value) ||
-        project.description.toLowerCase().includes(value) ||
+      const matchesSearch =
+        project.title.toLowerCase().includes(searchValue) ||
+        project.description.toLowerCase().includes(searchValue) ||
+        project.course.toLowerCase().includes(searchValue) ||   // ✅ THIS LINE
         project.techStack.some((tech) =>
-          tech.toLowerCase().includes(value)
-        )
-      );
-    })
-    .filter(
-      (project) =>
+          tech.toLowerCase().includes(searchValue)
+        );
+
+      const matchesCourse =
         selectedCourse === "All" ||
-        project.course.includes(selectedCourse)
-    )
-    .filter(
-      (project) =>
+        project.course.includes(selectedCourse);
+
+      const matchesTech =
         selectedTech === "All" ||
-        project.techStack.includes(selectedTech)
-    )
+        project.techStack.includes(selectedTech);
+
+      return matchesSearch && matchesCourse && matchesTech;
+    })
     .sort((a, b) => {
       if (sortType === "Most Popular") return b.views - a.views;
       if (sortType === "Most Liked") return b.likes - a.likes;
@@ -125,8 +126,12 @@ export default function Projects() {
           <h1>Browse Projects</h1>
           <p>Explore academic projects shared by your fellow students</p>
         </div>
-        <button className="upload-btn">Upload Your Project</button>
+
+        <Link to="/upload-project">
+          <button className="upload-btn">Upload Your Project</button>
+        </Link>
       </div>
+      <hr />
 
       <div className="filter-bar">
         <input

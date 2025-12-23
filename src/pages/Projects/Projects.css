@@ -23,7 +23,7 @@
 }
 
 .upload-btn {
-  background: #2563eb;
+  background: linear-gradient(90deg, #2563eb, #4f46e5);
   color: white;
   border: none;
   padding: 10px 16px;

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { GraduationCap, UserCircle } from "lucide-react";
 import "./Navbar.css";
 
@@ -9,19 +9,42 @@ function Navbar({ isLoggedIn = false, userName = "Student" }) {
 
         {/* Brand */}
         <div className="navbarBrand">
-          <GraduationCap size={22} />
+          <GraduationCap size={35} />
           <span>StudentHub</span>
         </div>
 
-        {/* Links */}
-        <nav className="navbarLinks">
-          <Link to="/">Home</Link>
-          <Link to="/projects">Projects</Link>
-          <Link to="/about">About</Link>
-        </nav>
-
         {/* Right Actions */}
         <div className="navbarActions">
+
+          <nav className="navbarLinks">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "navLink active" : "navLink"
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/projects"
+              className={({ isActive }) =>
+                isActive ? "navLink active" : "navLink"
+              }
+            >
+              Projects
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? "navLink active" : "navLink"
+              }
+            >
+              About
+            </NavLink>
+          </nav>
+
           {!isLoggedIn ? (
             <>
               <Link to="/login" className="loginLink">

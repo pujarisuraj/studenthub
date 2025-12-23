@@ -22,31 +22,75 @@
   color: #1e293b;
 }
 
+/* ========================= */
+/* NAV LINKS */
+/* ========================= */
+
 .navbarLinks {
   display: flex;
-  gap: 24px;
+  gap: 20px;
 }
 
 .navbarLinks a {
+  position: relative;              /* IMPORTANT */
   text-decoration: none;
   font-size: 15px;
+  font-weight: 600;
   color: #475569;
+  padding: 6px 2px;
+  transition: color 0.3s ease;
 }
 
+/* Hover color */
 .navbarLinks a:hover {
-  color: #1e293b;
+  color: #4f46e5;
 }
+
+/* Underline animation */
+.navbarLinks a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 3px;
+  background-color: #4f46e5; /* same theme color */
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+/* Hover underline */
+.navbarLinks a:hover::after {
+  width: 100%;
+}
+
+/* ACTIVE LINK (NavLink adds .active automatically) */
+.navbarLinks a.active {
+  color: #4f46e5;
+}
+
+.navbarLinks a.active::after {
+  width: 100%;
+}
+
+/* ========================= */
+/* RIGHT ACTIONS */
+/* ========================= */
 
 .navbarActions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .loginLink {
   text-decoration: none;
   color: #475569;
   font-size: 15px;
+}
+
+.loginLink:hover {
+  color: #4f46e5;
 }
 
 .signupButton {
@@ -57,6 +101,7 @@
   font-size: 14px;
   text-decoration: none;
   font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
 .signupButton:hover {
