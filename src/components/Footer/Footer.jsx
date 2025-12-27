@@ -1,5 +1,5 @@
 import React from "react";
-import { GraduationCap, Github, Linkedin, Mail, Twitter, Heart, TrendingUp, Users, FolderGit2 } from "lucide-react";
+import { GraduationCap, Github, Linkedin, Mail, Twitter, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
@@ -11,37 +11,6 @@ export default function Footer() {
       <div className="footer-wave"></div>
 
       <div className="footer-container">
-        {/* Stats Section */}
-        <div className="footer-stats">
-          <div className="stat-card">
-            <div className="stat-icon">
-              <Users />
-            </div>
-            <div className="stat-info">
-              <div className="stat-number">500+</div>
-              <div className="stat-label">Active Students</div>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon">
-              <FolderGit2 />
-            </div>
-            <div className="stat-info">
-              <div className="stat-number">100+</div>
-              <div className="stat-label">Projects Shared</div>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon">
-              <TrendingUp />
-            </div>
-            <div className="stat-info">
-              <div className="stat-number">95%</div>
-              <div className="stat-label">Success Rate</div>
-            </div>
-          </div>
-        </div>
-
         {/* Main Footer Content */}
         <div className="footer-main">
           {/* Brand Column */}
@@ -59,16 +28,13 @@ export default function Footer() {
               Empowering the next generation of innovators through seamless academic collaboration and project continuation.
             </p>
             <div className="footer-social">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href="https://github.com/pujarisuraj" target="_blank" rel="noopener noreferrer" className="social-link">
                 <Github />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href="https://www.linkedin.com/in/pujarisuraj/" target="_blank" rel="noopener noreferrer" className="social-link">
                 <Linkedin />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">
-                <Twitter />
-              </a>
-              <a href="mailto:contact@studenthub.com" className="social-link">
+              <a href="mailto:surajpujari8383@gmail.com" className="social-link">
                 <Mail />
               </a>
             </div>

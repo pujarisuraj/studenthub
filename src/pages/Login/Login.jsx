@@ -1,57 +1,166 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  GraduationCap,
-  Mail,
-  Lock,
-  Eye,
-  EyeOff
-} from "lucide-react";
+import { GraduationCap, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { loginUser } from "../../services/api";
+import SuccessModal from "../../components/SuccessModal/SuccessModal";
+import Toast from "../../components/Toast/Toast";
 import "./Login.css";
 
-function Login() {
+function Login({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [loginRole, setLoginRole] = useState(""); // Track user role for custom messages
 
   const navigate = useNavigate();
 
-  // College email validation
+  // Auto-dismiss error after 3 seconds
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 3000); // 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
+
+  // Email validation - Allow college emails OR authorized admin email
   const isValidCollegeEmail = (email) => {
     const collegeEmailPattern = /^SCFP\d+@mitvpu\.ac\.in$/;
-    return collegeEmailPattern.test(email);
+    const adminEmail = "surajpujari8383@gmail.com";
+    return (
+      collegeEmailPattern.test(email) ||
+      email.toLowerCase() === adminEmail.toLowerCase()
+    );
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage("");
 
     if (!email || !password) {
-      setErrorMessage("Please enter both email and password.");
+      setErrorMessage("Please check your email and password.");
       return;
     }
 
     if (!isValidCollegeEmail(email)) {
-      setErrorMessage(
-        "Only official MIT VPU student email IDs are allowed."
-      );
+      setErrorMessage("Please check your email and password.");
       return;
     }
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      // Call backend login API
+      const response = await loginUser({
+        email: email,
+        password: password,
+      });
+
+      // Login successful - token is already stored in localStorage
+      // **IMPORTANT: Fetch profile data immediately to get fullName**
+      let userName = "Student";
+
+      try {
+        // Import and call getUserProfile API
+        const { getUserProfile } = await import("../../services/api");
+        const profileData = await getUserProfile();
+
+        console.log("✅ Profile data fetched after login:", profileData);
+
+        // Use fullName from profile API
+        if (profileData.fullName) {
+          userName = profileData.fullName;
+
+          // Store in localStorage with accountStatus
+          const userObj = {
+            fullName: profileData.fullName,
+            email: profileData.email || response.email,
+            role: response.role || "STUDENT",
+            accountStatus: profileData.accountStatus || "ACTIVE",
+          };
+          localStorage.setItem("user", JSON.stringify(userObj));
+          console.log("✅ Stored user object in localStorage:", userObj);
+        }
+      } catch (profileError) {
+        console.warn("⚠️ Could not fetch profile, falling back to JWT token");
+
+        // Fallback: Try to extract from JWT token
+        try {
+          const token = response.token || localStorage.getItem("token");
+          if (token) {
+            const payload = token.split(".")[1];
+            const decoded = JSON.parse(atob(payload));
+
+            // Use fullName from token if available
+            if (decoded.fullName) {
+              userName = decoded.fullName;
+            } else if (decoded.sub) {
+              // Fallback to email parsing
+              const emailPart = decoded.sub.split("@")[0];
+              const nameParts = emailPart
+                .split(".")
+                .map((part) => part.charAt(0).toUpperCase() + part.slice(1));
+              userName = nameParts.join(" ");
+            }
+          }
+        } catch (decodeError) {
+          console.error("❌ Error decoding token:", decodeError);
+          // Last fallback: email parsing
+          const emailPart = response.email?.split("@")[0] || "Student";
+          const nameParts = emailPart
+            .split(".")
+            .map((part) => part.charAt(0).toUpperCase() + part.slice(1));
+          userName = nameParts.join(" ");
+        }
+      }
+
+      // Store role for custom success message
+      setLoginRole(response.role || "STUDENT");
+
+      // Call the callback to update parent state
+      if (onLoginSuccess) {
+        onLoginSuccess({
+          email: response.email,
+          role: response.role,
+          userName: userName,
+        });
+      }
+
+      setShowSuccessModal(true);
       setIsSubmitting(false);
-      navigate("/dashboard");
-    }, 1000);
+    } catch (error) {
+      // Generic error - don't reveal specific details
+      setErrorMessage("Please check your email and password.");
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleModalClose = () => {
+    setShowSuccessModal(false);
+
+    // Redirect based on role
+    if (loginRole === "ADMIN") {
+      navigate("/admin"); // Admin Dashboard
+    } else {
+      navigate("/"); // Home page for regular users
+    }
   };
 
   return (
     <div className="loginPage">
-      <div className="loginContainer">
+      {/* Toast Notification */}
+      <Toast
+        message={errorMessage}
+        type="error"
+        onClose={() => setErrorMessage("")}
+      />
 
+      <div className="loginContainer">
         {/* Brand */}
         <div className="brandRow">
           <div className="brandIcon">
@@ -62,20 +171,13 @@ function Login() {
 
         {/* Login Card */}
         <section className="loginCard">
-          <h3 className="cardTitle">
-            Login
-          </h3>
+          <h3 className="cardTitle">Login</h3>
 
           <p className="cardDescription">
             Login using your official college email
           </p>
 
-          {errorMessage && (
-            <div className="errorMessage">{errorMessage}</div>
-          )}
-
           <form className="loginForm" onSubmit={handleFormSubmit}>
-
             {/* Email */}
             <div className="formField">
               <label>College Email</label>
@@ -136,8 +238,19 @@ function Login() {
         <Link to="/" className="backHomeLink">
           ← Back to Home
         </Link>
-
       </div>
+
+      {/* Beautiful Success Modal */}
+      {showSuccessModal && (
+        <SuccessModal
+          message={
+            loginRole === "ADMIN"
+              ? "Welcome to Admin Panel! 👑🎯"
+              : "Welcome back! Login successful 🎉"
+          }
+          onClose={handleModalClose}
+        />
+      )}
     </div>
   );
 }

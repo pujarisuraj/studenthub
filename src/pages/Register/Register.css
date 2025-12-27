@@ -3,8 +3,8 @@
 /* ========================= */
 
 .registerPage {
-  min-height: 100vh;
   padding-top: 80px;
+  padding-bottom: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -453,3 +453,69 @@
     height: 300px;
   }
 }
+
+/* ========================= */
+/* PASSWORD VALIDATION */
+/* ========================= */
+
+.password-requirements {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.requirements-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.password-rule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.password-rule:last-child {
+  margin-bottom: 0;
+}
+
+.rule-icon {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rule-icon.valid {
+  color: #10b981;
+}
+
+.rule-icon.invalid {
+  color: #ef4444;
+}
+
+.rule-text {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.rule-text.valid {
+  color: #059669;
+}
+
+.rule-text.invalid {
+  color: #64748b;
+}
+
+/* ========================= */
+/* READONLY FIELD */
+/* ========================= */
+
+.readonly-field {
+  background-color: #f1f5f9;
+  cursor: not-allowed;
+}
+

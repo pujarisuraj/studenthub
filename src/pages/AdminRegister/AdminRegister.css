@@ -1,0 +1,434 @@
+/* Admin Registration Page - Premium Glassmorphic Design */
+
+.adminRegisterPage {
+  min-height: 100vh;
+  padding-top: 100px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated background particles */
+.adminRegisterPage::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  top: -100px;
+  left: -100px;
+  animation: adminFloat 20s infinite ease-in-out;
+}
+
+.adminRegisterPage::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  bottom: -80px;
+  right: -80px;
+  animation: adminFloat 15s infinite ease-in-out reverse;
+}
+
+@keyframes adminFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(50px, 50px) scale(1.1);
+  }
+}
+
+.adminRegisterContainer {
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Brand Section */
+.adminBrandRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  animation: adminSlideDown 0.6s ease-out;
+}
+
+@keyframes adminSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.adminBrandIcon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.3);
+}
+
+.adminBrandName {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+/* Admin Badge */
+.adminBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(239, 68, 68, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 50px;
+  margin: 0 auto 24px;
+  width: fit-content;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  animation: adminPulse 2s infinite;
+}
+
+.adminBadge svg {
+  color: #fbbf24;
+}
+
+@keyframes adminPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Registration Card */
+.adminRegisterCard {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: adminSlideUp 0.6s ease-out 0.2s both;
+}
+
+@keyframes adminSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.adminCardTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.adminCardDescription {
+  font-size: 14px;
+  color: #64748b;
+  text-align: center;
+  margin: 0 0 32px 0;
+  font-weight: 500;
+}
+
+/* Form */
+.adminRegisterPage .adminRegisterForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.adminRegisterPage .adminFormField {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.adminRegisterPage .adminFormField label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 2px;
+}
+
+.adminRegisterPage .adminInputWithIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+}
+
+.adminRegisterPage .adminInputWithIcon svg:first-child {
+  position: absolute;
+  left: 16px;
+  color: #94a3b8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.adminRegisterPage .adminInputWithIcon input,
+.adminRegisterPage .adminInputWithIcon select {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1e293b;
+  background: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+/* Special padding for password fields to make space for toggle button */
+.adminRegisterPage .adminInputWithIcon input[type="password"],
+.adminRegisterPage .adminInputWithIcon input[type="text"] {
+  padding-right: 48px;
+}
+
+.adminRegisterPage .adminInputWithIcon input:focus,
+.adminRegisterPage .adminInputWithIcon select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.adminRegisterPage .adminInputWithIcon input::placeholder {
+  color: #cbd5e1;
+  font-weight: 400;
+}
+
+.adminRegisterPage .adminPasswordToggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 100;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+.adminRegisterPage .adminPasswordToggle:hover {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.08);
+}
+
+.adminRegisterPage .adminPasswordToggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.adminRegisterPage .adminPasswordToggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Submit Button */
+.adminRegisterPage .adminRegisterButton {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.adminRegisterPage .adminRegisterButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.adminRegisterPage .adminRegisterButton:hover::before {
+  left: 100%;
+}
+
+.adminRegisterPage .adminRegisterButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(102, 126, 234, 0.4);
+}
+
+.adminRegisterPage .adminRegisterButton:active {
+  transform: translateY(0);
+}
+
+.adminRegisterPage .adminRegisterButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Divider */
+.adminRegisterPage .adminDivider {
+  margin: 24px 0 20px;
+  text-align: center;
+  position: relative;
+}
+
+.adminRegisterPage .adminDivider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+}
+
+.adminRegisterPage .adminDivider span {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0 16px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Login Link */
+.adminRegisterPage .adminLoginLink {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #667eea;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+}
+
+.adminRegisterPage .adminLoginLink:hover {
+  background: white;
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+/* Back Home Link */
+.adminRegisterPage .adminBackHomeLink {
+  display: inline-block;
+  margin-top: 24px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: adminSlideUp 0.6s ease-out 0.4s both;
+}
+
+.adminRegisterPage .adminBackHomeLink:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-4px);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .adminRegisterPage {
+    padding-top: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 30px;
+  }
+
+  .adminRegisterCard {
+    padding: 28px 24px;
+  }
+
+  .adminCardTitle {
+    font-size: 22px;
+  }
+
+  .adminBrandName {
+    font-size: 24px;
+  }
+
+  .adminBadge {
+    font-size: 13px;
+    padding: 10px 20px;
+  }
+}

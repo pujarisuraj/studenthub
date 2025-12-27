@@ -1,9 +1,6 @@
-/* ========================= */
 /* LOGIN PAGE */
-/* ========================= */
-
 .loginPage {
-  min-height: 100vh;
+  padding: 80px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +35,6 @@
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0px) scale(1);
@@ -49,9 +45,19 @@
   }
 }
 
-/* ========================= */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
 /* CONTAINER */
-/* ========================= */
 
 .loginContainer {
   width: 100%;
@@ -61,9 +67,7 @@
   z-index: 1;
 }
 
-/* ========================= */
 /* BRAND */
-/* ========================= */
 
 .brandRow {
   display: flex;
@@ -108,9 +112,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* ========================= */
 /* LOGIN CARD */
-/* ========================= */
 
 .loginCard {
   background: rgba(255, 255, 255, 0.9);
@@ -154,12 +156,14 @@
   margin: 0 0 28px 0;
 }
 
-/* ========================= */
 /* ERROR MESSAGE */
-/* ========================= */
 
 .errorMessage {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.1) 0%,
+    rgba(220, 38, 38, 0.05) 100%
+  );
   color: #dc2626;
   padding: 14px 16px;
   border-radius: 10px;
@@ -171,7 +175,6 @@
 }
 
 @keyframes shake {
-
   0%,
   100% {
     transform: translateX(0);
@@ -186,9 +189,7 @@
   }
 }
 
-/* ========================= */
 /* FORM */
-/* ========================= */
 
 .loginForm {
   display: flex;
@@ -254,9 +255,7 @@
   font-weight: 400;
 }
 
-/* ========================= */
 /* PASSWORD TOGGLE */
-/* ========================= */
 
 .passwordToggle {
   background: none;
@@ -276,9 +275,7 @@
   color: #4f46e5;
 }
 
-/* ========================= */
 /* FORM ACTIONS */
-/* ========================= */
 
 .formActions {
   text-align: right;
@@ -298,9 +295,7 @@
   text-decoration: underline;
 }
 
-/* ========================= */
 /* LOGIN BUTTON */
-/* ========================= */
 
 .loginButton {
   width: 100%;
@@ -331,9 +326,7 @@
   cursor: not-allowed;
 }
 
-/* ========================= */
 /* DIVIDER */
-/* ========================= */
 
 .divider {
   display: flex;
@@ -349,16 +342,19 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(203, 213, 225, 0.5), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(203, 213, 225, 0.5),
+    transparent
+  );
 }
 
 .divider span {
   margin: 0 16px;
 }
 
-/* ========================= */
 /* REGISTER LINK */
-/* ========================= */
 
 .registerLink {
   display: block;
@@ -382,9 +378,7 @@
   box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
 }
 
-/* ========================= */
 /* BACK LINK */
-/* ========================= */
 
 .backHomeLink {
   display: block;
@@ -401,9 +395,7 @@
   color: #4f46e5;
 }
 
-/* ========================= */
 /* RESPONSIVE DESIGN */
-/* ========================= */
 
 @media (max-width: 520px) {
   .loginContainer {

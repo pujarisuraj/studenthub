@@ -10,7 +10,7 @@ import {
   FileText,
   UserCheck,
   Award,
-  TrendingUp
+  TrendingUp,
 } from "lucide-react";
 import "./Home.css";
 
@@ -19,7 +19,6 @@ export default function Home() {
 
   return (
     <div className="homePage">
-
       {/* Hero Section */}
       <section className="heroSection">
         <div className="heroContent">
@@ -32,9 +31,10 @@ export default function Home() {
           </h2>
 
           <p className="heroText">
-            Stop reinventing the wheel. Build upon existing academic projects, collaborate
-            across years, and create meaningful work that advances knowledge instead of
-            repeating it. StudentHub bridges the gap between generations of students.
+            Stop reinventing the wheel. Build upon existing academic projects,
+            collaborate across years, and create meaningful work that advances
+            knowledge instead of repeating it. StudentHub bridges the gap
+            between generations of students.
           </p>
 
           <div className="heroButtons">
@@ -80,8 +80,8 @@ export default function Home() {
               </div>
               <h3 className="cardTitle">Students Repeating Solved Ideas</h3>
               <p className="cardText">
-                The same project topics are repeated year after year, wasting time
-                and resources on problems that have already been addressed.
+                The same project topics are repeated year after year, wasting
+                time and resources on problems that have already been addressed.
               </p>
             </div>
 
@@ -115,8 +115,8 @@ export default function Home() {
               </div>
               <h3 className="stepTitle">Seniors Upload Projects</h3>
               <p className="stepText">
-                Graduating students upload their completed academic projects with
-                full documentation and source code.
+                Graduating students upload their completed academic projects
+                with full documentation and source code.
               </p>
             </div>
 
@@ -162,7 +162,8 @@ export default function Home() {
               </div>
               <h3 className="featureTitle">Verified College Users</h3>
               <p className="featureText">
-                Only verified students from registered colleges can upload and access projects.
+                Only verified students from registered colleges can upload and
+                access projects.
               </p>
             </div>
 
@@ -172,7 +173,8 @@ export default function Home() {
               </div>
               <h3 className="featureTitle">Complete Documentation</h3>
               <p className="featureText">
-                Every project includes detailed documentation, setup guides, and implementation notes.
+                Every project includes detailed documentation, setup guides, and
+                implementation notes.
               </p>
             </div>
 
@@ -182,7 +184,8 @@ export default function Home() {
               </div>
               <h3 className="featureTitle">GitHub Integration</h3>
               <p className="featureText">
-                Direct links to GitHub repositories and live project demos for easy access.
+                Direct links to GitHub repositories and live project demos for
+                easy access.
               </p>
             </div>
 
@@ -192,7 +195,8 @@ export default function Home() {
               </div>
               <h3 className="featureTitle">Team Collaboration</h3>
               <p className="featureText">
-                Work with teammates and track contributions from multiple students.
+                Work with teammates and track contributions from multiple
+                students.
               </p>
             </div>
 
@@ -202,7 +206,8 @@ export default function Home() {
               </div>
               <h3 className="featureTitle">Project Attribution</h3>
               <p className="featureText">
-                Proper credit to original creators and contributors at every version.
+                Proper credit to original creators and contributors at every
+                version.
               </p>
             </div>
 
@@ -212,13 +217,13 @@ export default function Home() {
               </div>
               <h3 className="featureTitle">Version Tracking</h3>
               <p className="featureText">
-                Track project evolution across years with version history and improvements.
+                Track project evolution across years with version history and
+                improvements.
               </p>
             </div>
           </div>
         </div>
       </section>
-
 
       {/* Call to Action Section */}
       <section className="ctaSection">
@@ -228,8 +233,8 @@ export default function Home() {
               Your academic project should not end after submission.
             </h2>
             <p className="ctaText">
-              Join StudentHub today and become part of a community that values knowledge
-              continuity, collaboration, and academic excellence.
+              Join StudentHub today and become part of a community that values
+              knowledge continuity, collaboration, and academic excellence.
             </p>
             <div className="ctaButtons">
               <button
@@ -248,7 +253,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }

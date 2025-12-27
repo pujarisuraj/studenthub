@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Status Checker</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .logged-out {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .logged-in {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .info {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .code {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>🔍 Login Status Checker</h1>
+
+        <div id="status"></div>
+
+        <div id="details"></div>
+
+        <h3 style="margin-top: 30px;">Quick Actions:</h3>
+        <button onclick="checkStatus()">🔄 Refresh Status</button>
+        <button onclick="window.open('/#/login', '_blank')">🔐 Go to Login</button>
+        <button onclick="simulateLogin()">✨ Simulate Login (Test)</button>
+        <button class="logout-btn" onclick="clearLogin()">🚪 Clear Login Data</button>
+
+        <div style="margin-top: 30px;">
+            <h3>Instructions:</h3>
+            <ol style="color: #64748b; line-height: 1.8;">
+                <li><strong>To see the logout button</strong>, you must first login</li>
+                <li>Click "Go to Login" button above</li>
+                <li>Enter your credentials and login</li>
+                <li>Come back to this page and click "Refresh Status"</li>
+                <li>If logged in, navigate to the main app to see the user button</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function checkStatus() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            const statusDiv = document.getElementById('status');
+            const detailsDiv = document.getElementById('details');
+
+            if (token && user) {
+                try {
+                    const userData = JSON.parse(user);
+                    statusDiv.innerHTML = `
+                        <div class="status logged-in">
+                            ✅ You are LOGGED IN!<br>
+                            The logout button should be visible in the navbar.
+                        </div>
+                    `;
+                    detailsDiv.innerHTML = `
+                        <div class="info">
+                            <strong>User Info:</strong><br>
+                            📧 Email: ${userData.email || 'N/A'}<br>
+                            🎭 Role: ${userData.role || 'STUDENT'}<br>
+                            👤 Display Name: ${userData.email ? userData.email.split('@')[0] : 'Student'}
+                        </div>
+                        <div class="info">
+                            <strong>What to do next:</strong><br>
+                            1. Go to: <a href="/#/" target="_blank">http://localhost:3000/#/</a><br>
+                            2. Look at top-right corner of navbar<br>
+                            3. You should see: <strong>[👤 ${userData.email ? userData.email.split('@')[0] : 'username'} ▼]</strong><br>
+                            4. Click it to open dropdown with logout button
+                        </div>
+                    `;
+                } catch (e) {
+                    statusDiv.innerHTML = `
+                        <div class="status logged-out">
+                            ❌ Invalid user data in localStorage
+                        </div>
+                    `;
+                    detailsDiv.innerHTML = `
+                        <div class="info">
+                            Error: ${e.message}<br>
+                            <button onclick="clearLogin()">Clear Invalid Data</button>
+                        </div>
+                    `;
+                }
+            } else {
+                statusDiv.innerHTML = `
+                    <div class="status logged-out">
+                        ❌ You are NOT logged in<br>
+                        The navbar will show "Login" and "Sign Up" buttons.
+                    </div>
+                `;
+                detailsDiv.innerHTML = `
+                    <div class="info">
+                        <strong>To see the logout button:</strong><br>
+                        1. Click the "Go to Login" button above<br>
+                        2. Enter your credentials (e.g., SCFP123456@mitvpu.ac.in)<br>
+                        3. Click "Sign In"<br>
+                        4. After successful login, the navbar will show the user button<br>
+                        5. Click the user button to see the logout option
+                    </div>
+                    <div class="info">
+                        <strong>Or simulate login for testing:</strong><br>
+                        Click "Simulate Login" button above to create test credentials.<br>
+                        Then refresh the main app to see the user button.
+                    </div>
+                    <div class="code">
+                        Missing:<br>
+                        ${!token ? '• No token found<br>' : ''}
+                        ${!user ? '• No user data found' : ''}
+                    </div>
+                `;
+            }
+        }
+
+        function simulateLogin() {
+            // Create fake login data for testing
+            const fakeToken = 'fake-jwt-token-for-testing-' + Date.now();
+            const fakeUser = {
+                email: 'test@mitvpu.ac.in',
+                role: 'STUDENT'
+            };
+
+            localStorage.setItem('token', fakeToken);
+            localStorage.setItem('user', JSON.stringify(fakeUser));
+
+            alert('✅ Simulated login created!\n\nNow:\n1. Refresh this page\n2. Or go to main app and refresh\n3. You should see the user button in navbar');
+
+            checkStatus();
+        }
+
+        function clearLogin() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            alert('🗑️ Login data cleared!\n\nThe navbar will now show "Login" and "Sign Up" buttons.');
+            checkStatus();
+        }
+
+        // Check status on load
+        checkStatus();
+
+        // Auto-refresh every 2 seconds
+        setInterval(checkStatus, 2000);
+    </script>
+</body>
+
+</html>

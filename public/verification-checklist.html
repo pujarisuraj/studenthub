@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Feature - Verification Checklist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #1e293b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge-pending {
+            background: #fef3c7;
+            color: #78350f;
+        }
+
+        .badge-complete {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: #f1f5f9;
+        }
+
+        .checklist-item.completed {
+            background: #d1fae5;
+            opacity: 0.7;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item.completed .checkbox {
+            background: #4f46e5;
+            border-color: #4f46e5;
+        }
+
+        .checkbox::after {
+            content: '✓';
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .checklist-item.completed .checkbox::after {
+            display: block;
+        }
+
+        .item-text {
+            flex: 1;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .alert {
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .quick-commands {
+            display: grid;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .command-btn {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            border: 1px solid #334155;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .command-btn:hover {
+            background: #334155;
+            border-color: #4f46e5;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>✅ Logout Feature Verification</h1>
+        <p class="subtitle">Step-by-step checklist to verify everything works</p>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="completedCount">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="remainingCount">12</div>
+                <div class="stat-label">Remaining</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="progressPercent">0%</div>
+                <div class="stat-label">Progress</div>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div>
+                <strong>Before Starting:</strong> Make sure both frontend (localhost:3000) and backend (localhost:8085)
+                are running.
+            </div>
+        </div>
+
+        <!-- Section 1: Basic Setup -->
+        <div class="section">
+            <h2 class="section-title">
+                🔧 Step 1: Basic Setup
+                <span class="status-badge badge-pending" id="section1-badge">Pending</span>
+            </h2>
+            <div class="checklist-item" data-item="1">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Clear browser cache</strong> - Press Ctrl+Shift+R (or Cmd+Shift+R on Mac)
+                </div>
+            </div>
+            <div class="checklist-item" data-item="2">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Open browser DevTools</strong> - Press F12</div>
+            </div>
+            <div class="checklist-item" data-item="3">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Check for console errors</strong> - No red errors in Console tab</div>
+            </div>
+        </div>
+
+        <!-- Section 2: Login Test -->
+        <div class="section">
+            <h2 class="section-title">
+                🔐 Step 2: Login Test
+                <span class="status-badge badge-pending" id="section2-badge">Pending</span>
+            </h2>
+            <div class="checklist-item" data-item="4">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Navigate to login page</strong> -
+                    <code>http://localhost:3000/#/login</code></div>
+            </div>
+            <div class="checklist-item" data-item="5">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Enter credentials</strong> - Use your test account (e.g.,
+                    SCFP123456@mitvpu.ac.in)</div>
+            </div>
+            <div class="checklist-item" data-item="6">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Successful login</strong> - See success modal and redirected to projects
+                    page</div>
+            </div>
+        </div>
+
+        <!-- Section 3: Button Visibility -->
+        <div class="section">
+            <h2 class="section-title">
+                👁️ Step 3: Button Visibility
+                <span class="status-badge badge-pending" id="section3-badge">Pending</span>
+            </h2>
+            <div class="checklist-item" data-item="7">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>User button visible</strong> - See username in navbar (top right)</div>
+            </div>
+            <div class="checklist-item" data-item="8">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Button styling correct</strong> - Purple/blue background, user icon,
+                    dropdown arrow</div>
+            </div>
+            <div class="checklist-item" data-item="9">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Hover effect works</strong> - Background darkens when hovering over
+                    button</div>
+            </div>
+        </div>
+
+        <!-- Section 4: Dropdown Test -->
+        <div class="section">
+            <h2 class="section-title">
+                📋 Step 4: Dropdown Menu
+                <span class="status-badge badge-pending" id="section4-badge">Pending</span>
+            </h2>
+            <div class="checklist-item" data-item="10">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Dropdown opens</strong> - Click username button to open dropdown menu
+                </div>
+            </div>
+            <div class="checklist-item" data-item="11">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Role badge visible</strong> - Shows "Role: STUDENT" (or your role) with
+                    gradient background</div>
+            </div>
+            <div class="checklist-item" data-item="12">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Logout button visible</strong> - Red logout button with icon appears
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Logout Test -->
+        <div class="section">
+            <h2 class="section-title">
+                🚪 Step 5: Logout Functionality
+                <span class="status-badge badge-pending" id="section5-badge">Pending</span>
+            </h2>
+            <div class="checklist-item" data-item="13">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Click logout button</strong> - Click the red logout button in dropdown
+                </div>
+            </div>
+            <div class="checklist-item" data-item="14">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Redirected to home</strong> - Automatically redirected to home page</div>
+            </div>
+            <div class="checklist-item" data-item="15">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>Navbar updated</strong> - Now shows "Login" and "Sign Up" buttons</div>
+            </div>
+            <div class="checklist-item" data-item="16">
+                <div class="checkbox"></div>
+                <div class="item-text"><strong>LocalStorage cleared</strong> - Check DevTools → Application → Local
+                    Storage (token and user should be gone)</div>
+            </div>
+        </div>
+
+        <div id="successAlert" style="display: none;" class="alert alert-success">
+            <span>🎉</span>
+            <div>
+                <strong>All Tests Passed!</strong> Your logout feature is working perfectly!
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="button-group">
+            <button class="btn-primary" onclick="window.open('/#/login', '_blank')">
+                🔐 Open Login Page
+            </button>
+            <button class="btn-primary" onclick="window.open('/role-test-panel.html', '_blank')">
+                🔄 Role Test Panel
+            </button>
+            <button class="btn-secondary" onclick="location.reload()">
+                🔄 Reset Checklist
+            </button>
+            <button class="btn-secondary" onclick="window.open('/#/projects', '_blank')">
+                📁 Open Projects
+            </button>
+        </div>
+
+        <!-- Console Commands -->
+        <div class="section">
+            <h3 style="margin-bottom: 15px; color: #1e293b;">💻 Quick Console Commands</h3>
+            <p style="color: #64748b; margin-bottom: 10px; font-size: 14px;">
+                Click any command to copy it, then paste in browser console (F12 → Console tab)
+            </p>
+            <div class="quick-commands">
+                <button class="command-btn" onclick="copyCommand('localStorage.getItem(\'token\')')">
+                    localStorage.getItem('token') // Check if logged in
+                </button>
+                <button class="command-btn" onclick="copyCommand('localStorage.getItem(\'user\')')">
+                    localStorage.getItem('user') // View user data
+                </button>
+                <button class="command-btn" onclick="copyCommand('document.querySelector(\'.userInfo\')')">
+                    document.querySelector('.userInfo') // Find user button
+                </button>
+                <button class="command-btn" onclick="copyCommand('switchToAdmin()')">
+                    switchToAdmin() // Switch to ADMIN role
+                </button>
+                <button class="command-btn" onclick="copyCommand('switchToStudent()')">
+                    switchToStudent() // Switch to STUDENT role
+                </button>
+                <button class="command-btn" onclick="copyCommand('forceLogout()')">
+                    forceLogout() // Force logout (testing)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const totalItems = 16;
+        let completed = new Set();
+
+        // Load saved progress
+        const savedProgress = localStorage.getItem('verificationProgress');
+        if (savedProgress) {
+            completed = new Set(JSON.parse(savedProgress));
+            completed.forEach(item => {
+                const element = document.querySelector(`[data-item="${item}"]`);
+                if (element) element.classList.add('completed');
+            });
+        }
+
+        // Handle checklist item clicks
+        document.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', function () {
+                const itemNum = this.dataset.item;
+                if (this.classList.contains('completed')) {
+                    this.classList.remove('completed');
+                    completed.delete(itemNum);
+                } else {
+                    this.classList.add('completed');
+                    completed.add(itemNum);
+                }
+                updateProgress();
+                saveProgress();
+            });
+        });
+
+        function updateProgress() {
+            const count = completed.size;
+            const percent = Math.round((count / totalItems) * 100);
+
+            document.getElementById('completedCount').textContent = count;
+            document.getElementById('remainingCount').textContent = totalItems - count;
+            document.getElementById('progressPercent').textContent = percent + '%';
+            document.getElementById('progressBar').style.width = percent + '%';
+
+            // Update section badges
+            updateSectionBadge(1, [1, 2, 3]);
+            updateSectionBadge(2, [4, 5, 6]);
+            updateSectionBadge(3, [7, 8, 9]);
+            updateSectionBadge(4, [10, 11, 12]);
+            updateSectionBadge(5, [13, 14, 15, 16]);
+
+            // Show success message
+            if (count === totalItems) {
+                document.getElementById('successAlert').style.display = 'flex';
+            } else {
+                document.getElementById('successAlert').style.display = 'none';
+            }
+        }
+
+        function updateSectionBadge(section, items) {
+            const badge = document.getElementById(`section${section}-badge`);
+            const allCompleted = items.every(item => completed.has(String(item)));
+            if (allCompleted) {
+                badge.textContent = 'Complete';
+                badge.className = 'status-badge badge-complete';
+            } else {
+                badge.textContent = 'Pending';
+                badge.className = 'status-badge badge-pending';
+            }
+        }
+
+        function saveProgress() {
+            localStorage.setItem('verificationProgress', JSON.stringify([...completed]));
+        }
+
+        function copyCommand(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Copied to clipboard! Now paste in browser console (F12)');
+            }).catch(() => {
+                alert('Command: ' + text);
+            });
+        }
+
+        // Initial update
+        updateProgress();
+    </script>
+</body>
+
+</html>
