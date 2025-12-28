@@ -178,7 +178,7 @@ export default function ProjectCard({ project, onShowToast }) {
               boxShadow: "0 4px 12px rgba(16, 185, 129, 0.4)",
             }}
           >
-            ✅ Admin Approved
+            Admin Approved
           </span>
         ) : transformedProject.status === "PENDING" ? (
           <span
@@ -204,7 +204,7 @@ export default function ProjectCard({ project, onShowToast }) {
               boxShadow: "0 4px 12px rgba(239, 68, 68, 0.4)",
             }}
           >
-            ❌ Rejected
+            Rejected
           </span>
         ) : (
           <span className={`status ${transformedProject.status}`}>
