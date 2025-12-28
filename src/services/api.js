@@ -1,5 +1,5 @@
 // API Base URL - Update this to match your backend server
-const API_BASE_URL = "http://localhost:8085/api";
+const API_BASE_URL = "https://studenthub-backend-production.up.railway.app/api";
 
 // Helper function to get auth token
 const getAuthToken = () => {
