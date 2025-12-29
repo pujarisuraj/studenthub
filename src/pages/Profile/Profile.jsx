@@ -888,7 +888,7 @@ function Profile() {
                 <div style={{ position: "relative" }}>
                   <input
                     type={showNewPassword ? "text" : "password"}
-                    placeholder="Enter new password (min 6 characters)"
+                    placeholder="Enter new password"
                     value={passwordData.newPassword}
                     onChange={(e) =>
                       handlePasswordInputChange("newPassword", e.target.value)
